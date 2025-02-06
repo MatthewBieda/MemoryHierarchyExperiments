@@ -13,7 +13,7 @@ double benchmark_vector_insertion() {
 
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dist(0, vec.size() - 1);
+    std::uniform_int_distribution<> dist(0, 100000);
 
     auto start = std::chrono::high_resolution_clock::now();
     for (int i = 0; i < NUM_INSERTIONS; ++i) {
@@ -29,14 +29,14 @@ double benchmark_vector_insertion() {
 // Function to benchmark std::list insertions at random positions
 double benchmark_list_insertion() {
     std::list<int> lst(NUM_INSERTIONS);
-    auto it = lst.begin();
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dist(0, lst.size() - 1);
+    std::uniform_int_distribution<> dist(0, 100000);
 
     auto start = std::chrono::high_resolution_clock::now();
     for (int i = 0; i < NUM_INSERTIONS; ++i) {
         int pos = dist(gen);
+        auto it = lst.begin();
         std::advance(it, pos);
         lst.insert(it, i);
     }
